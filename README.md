@@ -1,71 +1,189 @@
-# tg-deepseek-share README
+# TG-DeepSeek Share - VS Code Extension
 
-This is the README for your extension "tg-deepseek-share". After writing up a brief description, we recommend including the following sections.
+**`TG-DeepSeek Share`** - это расширение для VS Code, позволяющее быстро делиться выделенным кодом в Telegram и DeepSeek. Расширение предоставляет две команды с горячими клавишами для быстрого доступа.
 
-## Features
+## Функциональность
+Расширение добавляет две команды:
+- Отправка кода в Telegram с форматированием
+- Отправка кода в DeepSeek Chat
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Команды и сочетания клавиш
 
-For example if there is an image subfolder under your extension project workspace:
+### Команда: `tg-deepseek-share.shareToTelegram`
 
-\!\[feature X\]\(images/feature-x.png\)
+**Сочетание клавиш**: `Ctrl + \ , Ctrl + T`
+```
+Отправляет выделенный код в Telegram Desktop с форматированием в ``` блоки.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Параметры:
+    Нет
 
-## Requirements
+Возвращаемое значение:
+    void
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Пример использования:
+    Выделите код в редакторе:
+    int main() {
+        return 0;
+    }
 
-## Extension Settings
+    Нажмите Ctrl + \ , затем Ctrl + T
+    Результат: код форматируется и копируется в буфер:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+    ```
+    int main() {
+        return 0;
+    }
+    ```
+    
+    Открывается Telegram Desktop для вставки
+```
+### Команда: `tg-deepseek-share.shareToDeepSeek`
 
-For example:
+**Сочетание клавиш**: `Ctrl + \ , Ctrl + D` 
+```
+Отправляет выделенный код в DeepSeek Chat.
 
-This extension contributes the following settings:
+Параметры:
+    Нет
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Возвращаемое значение:
+    void
 
-## Known Issues
+Пример использования:
+    Выделите код в редакторе:
+    int main() {
+        return 0;
+    }
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+    Нажмите Ctrl + \ , затем Ctrl + T
+    Результат: код форматируется и копируется в буфер:
 
-## Release Notes
+    ```
+    int main() {
+        return 0;
+    }
+    ```
 
-Users appreciate release notes as you update your extension.
+    Открывается DeepSeek для вставки
+```
+## Функции расширения
 
-### 1.0.0
+### Функция: `activate(context)`
+```
+Активирует расширение VS Code для отправки кода в Telegram и DeepSeek.
 
-Initial release of ...
+Параметры:
+    context (vscode.ExtensionContext): контекст расширения VS Code
 
-### 1.0.1
+Возвращаемое значение:
+    void
 
-Fixed issue #.
+Пример вызова:
+    Вызывается автоматически VS Code при активации расширения
+    activate(extensionContext);
+```
+### Функция: `openTelegramWithCode(code)`
+```
+Открывает Telegram Desktop с кодом, отформатированным в ``` блоки.
 
-### 1.1.0
+Параметры:
+    code (string): исходный код для отправки
 
-Added features X, Y, and Z.
+Возвращаемое значение:
+    void
 
----
+Пример вызова:
+    openTelegramWithCode('console.log("test");');
 
-## Following extension guidelines
+    Результат:
+    В буфер обмена попадает:
+    ```
+    console.log("test");
+    ```
+    Открывается Telegram Desktop
+```
+### Функция: `shareToDeepSeekChat(code)`
+```
+Открывает DeepSeek в браузере с кодом в буфере обмена.
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+Параметры:
+    code (string): исходный код для отправки
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+Возвращаемое значение:
+    void
 
-## Working with Markdown
+shareToDeepSeekChat('function sum(a, b) { return a + b; }');
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+    Результат:
+    В буфер обмена попадает: 'function sum(a, b) { return a + b; }'
+    Открывается https://chat.deepseek.com в браузере
+```
+### Функция: `openUrl(url)`
+```
+Открывает URL в браузере по умолчанию для текущей ОС.
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+Поддерживаемые платформы:
+- Windows: использует команду 'start'
+- macOS: использует команду 'open'
+- Linux: использует команду 'xdg-open'
 
-## For more information
+Параметры:
+    url (string): URL для открытия
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+Возвращаемое значение:
+    void
 
-**Enjoy!**
+Примеры вызова:
+    На Windows:
+    openUrl('https://chat.deepseek.com');
+    Выполняется: start "" "https://chat.deepseek.com"
+
+    На macOS:
+    openUrl('tg://');
+    Выполняется: open "tg://"
+
+    На Linux:
+    openUrl('https://web.telegram.org');
+    Выполняется: xdg-open "https://web.telegram.org"
+```
+### Функция: `deactivate()`
+```
+Деактивирует расширение при выгрузке.
+
+Параметры:
+    Нет
+
+Возвращаемое значение:
+    void
+
+Пример вызова:
+    Вызывается автоматически VS Code при деактивации расширения
+    deactivate();
+```
+
+## Требования
+
+- Visual Studio Code версии 1.85.0 или выше
+- Node.js (для разработки)
+- Установленный Telegram Desktop (для функции Telegram)
+- Браузер по умолчанию (для функции DeepSeek)
+
+## Установка
+
+1. Установите расширение из VS Code Marketplace
+2. Или соберите из исходного кода с помощью `npm run compile`
+3. Перезапустите VS Code
+
+## Особенности работы
+
+- Для Telegram код автоматически форматируется в ``` блоки для лучшего отображения
+- Для DeepSeek код передается как обычный текст
+- Код всегда копируется в буфер обмена перед открытием приложения
+- Расширение работает на Windows, macOS и Linux
+
+## История изменений
+
+| Хеш коммита | Изменения |
+|:------:|-----------|
+| `d1ceac4` | add plugin |
