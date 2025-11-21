@@ -167,3 +167,5 @@ shareToDeepSeekChat('function sum(a, b) { return a + b; }');
 | Хеш коммита | Изменения |
 |:------:|-----------|
 | `d1ceac4` | add plugin |
+| `42327a7` | add docs |
+| `7a74518` | done documentation |
