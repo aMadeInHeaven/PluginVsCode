@@ -1,5 +1,13 @@
 # Автор: Сыщиков Константин Алексеевич М3102
 
+```
+tg-deepseek-share/
+├── package.json        – метаданные проекта, зависимости, настройки сборки/extension
+├── tsconfig.json       – конфигурация TypeScript
+├── README.md           – документация
+└── src/        
+    ├── extension.ts    – точка входа VS Code extension
+```
 # TG-DeepSeek Share - VS Code Extension
 
 **`TG-DeepSeek Share`** - это расширение для VS Code, позволяющее быстро делиться выделенным кодом в Telegram и DeepSeek. Расширение предоставляет две команды с горячими клавишами для быстрого доступа.
