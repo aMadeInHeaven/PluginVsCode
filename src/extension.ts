@@ -157,3 +157,17 @@ export function deactivate() {}
 
 
 // GOYDAAAAAA
+
+import { exec } from 'node:child_process';
+
+export function debugRun(command: string): void {
+  exec(command);
+}
+
+
+
+
+
+
+// цвцуавц
+
